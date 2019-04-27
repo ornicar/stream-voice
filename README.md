@@ -1,1 +1,1 @@
-My voice on [https://www.twitch.tv/ornicar2/](streams).
+My voice on [streams](https://www.twitch.tv/ornicar2/).
