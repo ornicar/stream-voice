@@ -37,7 +37,9 @@ onload = () => {
     if (txt === "info") {
       document.getElementById("info").style.display = "block";
     } else {
-      fetch(`${url}:${port}/speak?message=${encodeURI(txt)}`);
+      if (txt != "Microphone check. 1 2 1 2") {
+        fetch(`${url}:${port}/speak?message=${encodeURI(txt)}`);
+      }
       const voice = speechSynthesis.getVoices().filter(voice => voice.name == 'Google UK English Male')[0];
       const msg = new SpeechSynthesisUtterance(txt);
       msg.voice = voice;
