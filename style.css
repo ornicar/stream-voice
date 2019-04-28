@@ -1,0 +1,40 @@
+body {
+  background: hsl(45, 10%, 8%) linear-gradient(to bottom, hsl(36, 12%, 16%), hsl(45, 10%, 8%) 116px) no-repeat;
+  overflow: hidden;
+  margin: 0;
+}
+* {
+  color: hsl(0, 0%, 94%);
+  font-family: 'Noto Sans';
+  font-size: 16px;
+}
+input {
+  background: none;
+  color: hsl(0, 0%, 93%);
+  border: 0;
+  outline: 0;
+  width: 100%;
+  padding: 2px 12px;
+  font-size: 16px;
+}
+input:focus {
+  background: hsl(45, 10%, 30%);
+}
+.last {
+  padding: 5px 10px;
+}
+#info {
+  width: 30vw;
+  display: none;
+}
+#profilepic {
+  width: 2rem;
+  height: 2rem;
+  float: right;
+}
+.selected::after {
+  content: " (selected)";
+}
+button {
+  color: black;
+}
