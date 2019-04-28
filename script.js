@@ -37,9 +37,6 @@ onload = () => {
     if (txt === "info") {
       document.getElementById("info").style.display = "block";
     } else {
-      if (txt != "Microphone check. 1 2 1 2") {
-        fetch(`${url}:${port}/speak?message=${encodeURI(txt)}`);
-      }
       const voice = speechSynthesis.getVoices().filter(voice => voice.name == 'Google UK English Male')[0];
       const msg = new SpeechSynthesisUtterance(txt);
       msg.voice = voice;
@@ -50,14 +47,30 @@ onload = () => {
 
   document.querySelector('input').onkeypress = (e) => {
     if (e.keyCode == '13') {
-      let txt = e.target.value;
+
+      let orig = e.target.value;
+      let txt = orig;
+
+      if (!txt) return;
+
       abbrs.forEach(r => {
         txt = txt.replace(new RegExp(`\\b${r[0]}\\b`, 'g'), r[1]);
       });
       presets.forEach(p => {
         if (txt == p[0]) txt = p[1];
       });
-      if (txt) say(txt);
+
+      if (txt && orig[0] != '!') say(txt); // don't say twitch commands out loud
+
+      if (
+        orig != 'mic' && // don't post mic checks
+        orig[0] != ' ' // don't posts messages starting with a space
+      ) {
+        setTimeout(function() {
+          fetch(`${url}:${port}/speak?message=${encodeURI(txt)}`);
+        }, 1000);
+      }
+
       e.target.value = '';
     }
   }
