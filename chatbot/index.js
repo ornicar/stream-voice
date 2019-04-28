@@ -54,20 +54,8 @@ app.get("/status", (req, res) => {
 	res.send("ok");
 });
 
-app.get("/username", (req, res) => {
-	res.send(user.name);
-});
-
-app.get("/id", async (req, res) => {
-	res.send(user.id);
-});
-
-app.get("/profilepic", async (req, res) => {
-	res.send(user.profilepic);
-});
-
-app.get("/rooms", async (req, res) => {
-	res.send(user.rooms);
+app.get("/userinfo", (req, res) => {
+	res.send([user.name, user.id, user.profilepic, user.rooms]);
 });
 
 app.get("/setroom", (req, res) => {
