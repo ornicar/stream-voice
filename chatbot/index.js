@@ -3,8 +3,8 @@ const tmi = require("tmi.js");
 const fetch = require("node-fetch");
 const app = require("express")();
 const port = 9768;
-var user = {name: process.env.USERNAME};
-var apikey = process.env.APIKEY;
+var user = {name: process.env.TWITCH_USER};
+var apikey = process.env.TWITCH_APIKEY;
 var room = user.name;
 
 if (!user.name || !apikey)
