@@ -27,11 +27,35 @@
       .last {
         padding: 5px 10px;
       }
+      #info {
+        width: 30vw;
+        display: none;
+      }
+      #profilepic {
+        width: 2rem;
+        height: 2rem;
+        float: right;
+      }
+      .selected::after {
+        content: " (selected)";
+      }
+      button {
+        color: black;
+      }
     </style>
   </head>
   <body>
     <input autofocus />
     <div class="last"></div>
+    <div id="info">
+        <img id="profilepic" src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==">
+        <div>Channel: <span id="channel">?</span></div>
+        <div>Channel ID: <span id="id">?</span></div>
+        <div id="rooms">Rooms:</div>
+        <br>
+        <button onclick="this.parentElement.style.display = 'none'">Close</button>
+    </div>
+    <script src = "chat.js"></script>
     <script src = "script.js"></script>
   </body>
 </html>

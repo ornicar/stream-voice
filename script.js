@@ -33,11 +33,16 @@ const presets = [
 onload = () => {
 
   function say(txt) {
-    const voice = speechSynthesis.getVoices().filter(voice => voice.name == 'Google UK English Male')[0];
-    const msg = new SpeechSynthesisUtterance(txt);
-    msg.voice = voice;
-    speechSynthesis.speak(msg);
-    document.querySelector('.last').textContent = txt;
+    if (txt === "info") {
+      document.getElementById("info").style.display = "block";
+    } else {
+      fetch(`${url}:${port}/speak?message=${encodeURI(txt)}`);
+      const voice = speechSynthesis.getVoices().filter(voice => voice.name == 'Google UK English Male')[0];
+      const msg = new SpeechSynthesisUtterance(txt);
+      msg.voice = voice;
+      speechSynthesis.speak(msg);
+      document.querySelector('.last').textContent = txt;
+    }
   }
 
   document.querySelector('input').onkeypress = (e) => {
