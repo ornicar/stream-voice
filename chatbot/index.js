@@ -3,14 +3,14 @@ const tmi = require("tmi.js");
 const fetch = require("node-fetch");
 const app = require("express")();
 const port = 9768;
-var user = {name: process.env.USERNAME};
+var user = {name: process.env.CHANNEL};
 var apikey = process.env.APIKEY;
 var room = user.name;
 
 if (!user.name || !apikey)
 	throw new Error(`
-You must set the USERNAME and APIKEY environment variable
-where USERNAME is your Twitch username, and APIKEY is your OAuth key from
+You must set the CHANNEL and APIKEY environment variable
+where CHANNEL is your Twitch username, and APIKEY is your OAuth key from
 https://twitchapps.com/tmi/
 `);
 
