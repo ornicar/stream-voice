@@ -3,7 +3,7 @@ url = "http://localhost";
 port = 9768;
 
 var elements = {
-	settings: document.getElementById("settings"),
+	info: document.getElementById("info"),
 	profilepic: document.getElementById("profilepic"),
 	channel: document.getElementById("channel"),
 	id: document.getElementById("id"),
@@ -68,7 +68,7 @@ async function getRooms() {
 }
 
 if (!await serverUp()) {
-	elements.settings.innerText = `Could not connect to express server (${url}:${port}).`;
+	elements.info.innerText = `Could not connect to express server (${url}:${port}).`;
 	return;
 }
 
