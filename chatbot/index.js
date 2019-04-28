@@ -9,8 +9,8 @@ var room = user.name;
 
 if (!user.name || !apikey)
 	throw new Error(`
-You must set the USERNAME and APIKEY environment variable
-where USERNAME is your Twitch username, and APIKEY is your OAuth key from
+You must set the TWITCH_USER and TWITCH_APIKEY environment variable
+where TWITCH_USER is your Twitch username, and TWITCH_APIKEY is your OAuth key from
 https://twitchapps.com/tmi/
 `);
 
@@ -54,20 +54,8 @@ app.get("/status", (req, res) => {
 	res.send("ok");
 });
 
-app.get("/username", (req, res) => {
-	res.send(user.name);
-});
-
-app.get("/id", async (req, res) => {
-	res.send(user.id);
-});
-
-app.get("/profilepic", async (req, res) => {
-	res.send(user.profilepic);
-});
-
-app.get("/rooms", async (req, res) => {
-	res.send(user.rooms);
+app.get("/userinfo", (req, res) => {
+	res.send([user.name, user.id, user.profilepic, user.rooms]);
 });
 
 app.get("/setroom", (req, res) => {

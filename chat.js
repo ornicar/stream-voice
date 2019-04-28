@@ -3,7 +3,7 @@ url = "http://localhost";
 port = 9768;
 
 var elements = {
-	settings: document.getElementById("settings"),
+	info: document.getElementById("info"),
 	profilepic: document.getElementById("profilepic"),
 	channel: document.getElementById("channel"),
 	id: document.getElementById("id"),
@@ -19,63 +19,25 @@ async function serverUp() {
 	}
 }
 
-async function getUsername() {
+async function getUserInfo() {
 	try {
-		var req = await fetch(`${url}:${port}/username`);
-		var res = await req.text();
-		return res;
-	} catch (e) {
-		alert(`Could not fetch username. Error in console.`);
-		console.error(e);
-		return "Error";
-	}
-}
-
-async function getID() {
-	try {
-		var req = await fetch(`${url}:${port}/id`);
-		var res = await req.text();
-		return res;
-	} catch (e) {
-		alert(`Could not fetch id. Error in console.`);
-		console.error(e);
-		return "Error";
-	}
-}
-
-async function getProfilePic() {
-	try {
-		var req = await fetch(`${url}:${port}/profilepic`);
-		var res = await req.text();
-		return res;
-	} catch (e) {
-		alert(`Could not fetch profile picture. Error in console.`);
-		console.error(e);
-		return "";
-	}
-}
-
-async function getRooms() {
-	try {
-		var req = await fetch(`${url}:${port}/rooms`);
+		var req = await fetch(`${url}:${port}/userinfo`);
 		var res = await req.json();
 		return res;
 	} catch (e) {
-		alert(`Could not fetch rooms. Error in console.`);
+		alert(`Could not fetch user info. Error in console.`);
 		console.error(e);
 		return [];
 	}
 }
 
 if (!await serverUp()) {
-	elements.settings.innerText = `Could not connect to express server (${url}:${port}).`;
+	elements.info.innerText = `Could not connect to express server (${url}:${port}).`;
 	return;
 }
 
-elements.channel.innerText = await getUsername();
-elements.id.innerText = await getID();
-elements.profilepic.src = await getProfilePic();
-var rooms = await getRooms();
+var rooms;
+[elements.channel.innerText, elements.id.innerText, elements.profilepic.src, rooms] = [...await getUserInfo()];
 elements.rooms.insertAdjacentHTML("beforeend", `<li class="selected" onclick="fetch('${url}:${port}/setroom?room=main')">Main room</li>`);
 for (var i = 0; i < rooms.length; i++) {
 	elements.rooms.insertAdjacentHTML("beforeend", `<li onclick="fetch('${url}:${port}/setroom?room=${rooms[i]._id}')">${rooms[i].name} (${rooms[i]._id})</li>`);
