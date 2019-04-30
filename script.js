@@ -3,7 +3,6 @@ const abbrs = [
   ['idk', "i don't know"],
   ['wtf', "what the fuck"],
   ['tysub ', "thank you so much for the sub"],
-  ['brb', "be right back"],
   ['gtg', "I've got to go"],
   ['asap', "as soon as possible"],
   ['ty', "thank you"],
@@ -11,9 +10,11 @@ const abbrs = [
   ['ikr', "i know right"],
   ['np', "no problem"],
   ['pita', "pain in the arse"],
+  ['imo', "in my opinion"],
+  ['iirc', "if I remember correctly"],
   ['nvm', "nevermind"],
   ['af', "as fuck"],
-  ['cba', "i can't be arsed"],
+  ['cba', "can't be arsed"],
   ['wip', "work in progress"],
   ['ianal', "I am not a lawyer"]
 ];
@@ -25,10 +26,10 @@ const presets = [
   ['hello', "Hello and welcome to the stream. I'm coding lichess v2."],
   ['brb', "I will be right back."],
   ['mic', "Microphone check. 1 2 1 2"],
-  ['setup', "I run neo vim. in alacritty. in i3. in archlinux"],
-  ['tournament', "Please join the tournament! Link in the stream chat."],
+  ['setup', "I run neo vim. In alacritty. In i3. In ArchLinux. On a Dell XPS15. My dotfiles: github.com/ornicar/dotfiles"],
+  ['tournament', " Please join the tournament! Link in the stream chat."],
   ['song', "The current song is displayed at the bottom of the screen."],
-  ['when', "Lichess v2 will be released when it's ready. I don't know when that will happen. Could be 2 weeks, or 2 months."]
+  ['when', "Lichess v2 will be released when it's ready. I don't know when that will happen. Could be 2 days, or 2 weeks."]
 ];
 
 onload = () => {
@@ -49,7 +50,7 @@ onload = () => {
     if (e.keyCode == '13') {
 
       let orig = e.target.value;
-      let txt = orig;
+      let txt = orig.trim();
 
       if (!txt) return;
 
