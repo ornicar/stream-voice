@@ -29,7 +29,8 @@ const presets = [
   ['setup', "I run neo vim. In alacritty. In i3. In ArchLinux. On a Dell XPS15. My dotfiles: github.com/ornicar/dotfiles"],
   ['tournament', " Please join the tournament! Link in the stream chat."],
   ['song', "The current song is displayed at the bottom of the screen."],
-  ['when', "Lichess v2 will be released when it's ready. I don't know when that will happen. Could be 2 days, or 2 weeks."]
+  ['when', "Lichess v2 will be released on May 7th!"],
+  ['lang', "Lichess backend is mostly made of Scala, with some Rust and PHP services. The data lives in MongoDB and ElasticSearch. Frontend is mostly Typescript/Snabbdom and Sass."]
 ];
 
 onload = () => {
@@ -39,7 +40,7 @@ onload = () => {
       document.getElementById("info").style.display = "block";
     } else {
       const voice = speechSynthesis.getVoices().filter(voice => voice.name == 'Google UK English Male')[0];
-      const msg = new SpeechSynthesisUtterance(txt);
+      const msg = new SpeechSynthesisUtterance(txt.replace(/(LUL)/, ''));
       msg.voice = voice;
       speechSynthesis.speak(msg);
       document.querySelector('.last').textContent = txt;
