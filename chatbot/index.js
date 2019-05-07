@@ -16,11 +16,12 @@ https://twitchapps.com/tmi/
 
 var options = {
 	options: {
-		debug: false
+		debug: true
 	},
 	connection: {
 		cluster: "aws",
-		reconnect: true
+		reconnect: true,
+    secure: true
 	},
 	identity: {
 		username: user.name,
@@ -30,13 +31,14 @@ var options = {
 
 apikey = apikey.replace("oauth:", "");
 
-console.log("Fetching data..");
+console.log("Fetching data...");
 await getUserData(user.name);
-await getRooms(user.id);
 console.log("Data fetched!");
+console.log("Getting rooms...");
+await getRooms(user.id);
+console.log("Got rooms!");
 
 var client = new tmi.client(options);
-client.connect();
 
 client.on("connected", (address, port) => {
 	console.log(`Connected to ${address}:${port}.`);
