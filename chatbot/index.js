@@ -39,11 +39,15 @@ await getRooms(user.id);
 console.log("Got rooms!");
 
 var client = new tmi.client(options);
+client.connect().catch(e => console.log(e));
 
 client.on("connected", (address, port) => {
 	console.log(`Connected to ${address}:${port}.`);
 	console.log("Joining default room (main chat).");
 	client.join(user.name);
+});
+client.on("error", (e) => {
+  console.log(e);
 });
 
 
