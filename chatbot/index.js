@@ -3,7 +3,11 @@ const tmi = require("tmi.js");
 const fetch = require("node-fetch");
 const app = require("express")();
 const port = 9768;
-var user = {name: process.env.TWITCH_USER};
+var user = {
+  name: process.env.TWITCH_USER,
+  id: 63245307,
+  profilepic: 'https://static-cdn.jtvnw.net/jtv_user_pictures/2c6b728e-2572-43e8-b67d-405b14e1877c-profile_image-300x300.png'
+};
 var apikey = process.env.TWITCH_APIKEY;
 var room = user.name;
 
@@ -31,9 +35,9 @@ var options = {
 
 apikey = apikey.replace("oauth:", "");
 
-console.log("Fetching data...");
-await getUserData(user.name);
-console.log("Data fetched!");
+// console.log("Fetching data...");
+// await getUserData(user.name);
+// console.log("Data fetched!");
 console.log("Getting rooms...");
 await getRooms(user.id);
 console.log("Got rooms!");
@@ -93,14 +97,17 @@ function changeRoom(newRoom) {
 
 async function getUserData(username) {
 	try {
-		var req = await fetch(`https://api.twitch.tv/helix/users?login=${username}`, {
+		var req = await fetch(`https://api.twitch.tv/kraken/users?login=${username}`, {
 			headers: {
-				"Accept": "application/json",
-				"Client-ID": "abe7gtyxbr7wfcdftwyi9i5kej3jnq"
+				"Accept": "application/vnd.twitchtv.v5+json",
+				"Client-ID": "abe7gtyxbr7wfcdftwyi9i5kej3jnq",
+        "Authorization": `OAuth ${apikey}`
 			}
 		});
 		var res = await req.json();
+      console.log(JSON.stringify(res));
 		if (res["error"] || !res["data"].length) {
+      console.log(JSON.stringify(res));
 			throw new Error(`Could not fetch data.\n${res}`);
 		}
 		user.id = res["data"][0].id;
